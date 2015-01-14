@@ -2,18 +2,16 @@
 
 
 - Parse YAML front matter and Markdown body content with [front-matter][front-matter]
- - Compile Markdown to HTML with [markit][marked]
+- Compile Markdown to HTML with [markit][marked]
 
 
-install
--------
+### Install
 
 ```bash
 $ npm install markit-json --save-dev
 ```
 
-pipe
-----
+### Usage
 
 Like any self-respecting gulp plugin, transformed source files will flow onward to the destination of your choice with directory structure preserved. Tinker with [marked’s config][marked-config] by passing an object.
 
