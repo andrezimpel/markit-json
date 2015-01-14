@@ -1,3 +1,5 @@
+'use strict';
+
 var assert = require('assert');
 var fs = require('vinyl-fs');
 var gutil = require('gulp-util');
@@ -100,7 +102,6 @@ describe('parser', function(){
 });
 
 describe('tree', function(){
-
   it('should return JSON for all Markdown in a specified directory structure', function( done ){
     fs.src(fixture_path)
       .pipe(markdown())
@@ -109,42 +110,4 @@ describe('tree', function(){
       })
       .on('finish', done);
   });
-
-  it('should consolidate output into a single file if buffered with gulp-util', function( done ){
-    var stream = fs.src(fixture_path)
-      .pipe(gutil.buffer())
-      .pipe(markdown());
-
-    stream.on('finish', function(){
-      assert.equal(stream._readableState.length, 1);
-      assert.equal(stream._readableState.buffer[0].path, '/content.json');
-      done();
-    });
-  });
-
-  it('should allow the single file to be renamed', function( done ){
-    var stream = fs.src(fixture_path)
-      .pipe(gutil.buffer())
-      .pipe(markdown('blog.json', {
-        smartypants: true
-      }));
-
-    stream.on('finish', function(){
-      assert.equal(stream._readableState.buffer[0].path, '/blog.json');
-      assert(stream._readableState.buffer[0].contents.toString().match(/“/));
-      done();
-    });
-  });
-
-  it('should represent the directory structure as a nested object', function( done ){
-    fs.src(fixture_path)
-      .pipe(gutil.buffer())
-      .pipe(markdown())
-      .on('data', function( file ){
-        var json = JSON.parse(file.contents.toString());
-        assert(json.blog.posts['oakland-activist']);
-      })
-      .on('finish', done);
-  });
-
 });

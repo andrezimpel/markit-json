@@ -1,7 +1,0 @@
-machine:
-  node:
-    version: v0.10
-dependencies:
-  post:
-    - npm install jshint -g
-    - npm install mocha -g
