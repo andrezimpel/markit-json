@@ -23,7 +23,7 @@ function parse(file, flatten) {
     var path = file.relative.split('.').shift().replace(/\//g, '.');
     var parsed = frontMatter(file.contents.toString());
 
-    var body = parsed.body.split(/\n/);
+    var body = parsed.body.split(/\n/) + "ich bin der body";
     var bodyMarked = marked(parsed.body);
     var markup = bodyMarked.split(/\n/);
 
